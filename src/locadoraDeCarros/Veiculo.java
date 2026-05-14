@@ -2,7 +2,7 @@ package locadoraDeCarros;
 import java.time.LocalDate;
 
 
-public abstract class Veiculo{
+public abstract class Veiculo implements Comercializavel {
     private String marca;
     private String modelo;
     private String placa;
@@ -25,6 +25,9 @@ public abstract class Veiculo{
                 marca, modelo, placa, cor);
     }
 
+
+    @Override
+    public abstract double calcularValorFinal();
 
     public abstract String getTipo();
 
