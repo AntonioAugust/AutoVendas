@@ -3,30 +3,26 @@ import java.time.LocalDate;
 
 
 public abstract class Veiculo implements Comercializavel {
-    private int idVeiculo;
     private String marca;
     private String modelo;
     private String placa;
     private String cor;
     private LocalDate anoFabricacao;
-    private double precoBase;
 
 
-    public Veiculo(String marca, String modelo, String placa, String cor, LocalDate anoFabricacao, double precoBase) {
-        //this.idVeiculo = idVeiculo;
+    public Veiculo(String marca, String modelo, String placa, String cor, LocalDate anoFabricacao) {
         this.marca = marca;
         this.modelo = modelo;
         this.placa = placa;
         this.cor = cor;
         this.anoFabricacao = anoFabricacao;
-        this.precoBase = precoBase;
     }
 
 
     @Override
     public String toString() {
-        return String.format("ID: %d | %s %s | Placa: %s | Cor: %s",
-                idVeiculo, marca, modelo, placa, cor);
+        return String.format("| Marca: %s | Modelo: %s | Placa: %s | Cor: %s",
+                marca, modelo, placa, cor);
     }
 
 
@@ -34,10 +30,6 @@ public abstract class Veiculo implements Comercializavel {
     public abstract double calcularValorFinal();
 
     public abstract String getTipo();
-
-    public double getPreco(){
-        return precoBase;
-    }
 
 
     public String getMarca() {
@@ -58,9 +50,6 @@ public abstract class Veiculo implements Comercializavel {
 
     public LocalDate getAnoFabricacao() {
         return anoFabricacao;
-    }
-    public int getIdVeiculo(){
-        return  idVeiculo;
     }
 
     public void setMarca(String marca) {
@@ -83,7 +72,4 @@ public abstract class Veiculo implements Comercializavel {
         this.anoFabricacao = anoFabricacao;
     }
 
-    public void setIdVeiculo(int idVeiculo){
-        this.idVeiculo = idVeiculo;
-    }
 }

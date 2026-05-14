@@ -3,29 +3,45 @@ package locadoraDeCarros;
 import java.time.LocalDate;
 import java.util.Date;
 
-public class Venda {
-    private int idVenda;
-    private LocalDate data;
+public class Venda implements Calculavel{
+    private final int idVenda;
+    private final LocalDate data;
     private final Double valorFinal;
-    private String formaPagamento;
+    private final FormaPagamento formaPagamento;
+    private final itemEstoque itemVendido;
 
     // Snapshots (Strings que não mudam mais)
-    private String snapshotVeiculo;
-    private String snapshotCliente;
+    private  final String snapshotVeiculo;
+    private final String snapshotCliente;
 
-    public Venda(int idVenda, Cliente cliente, Veiculo veiculo, String formaPagamento) {
+    public Venda(int idVenda, Cliente cliente, FormaPagamento formaPagamento, itemEstoque itemVendido) {
         this.idVenda = idVenda;
         this.formaPagamento = formaPagamento;
         this.data = LocalDate.now();
+        this.itemVendido = itemVendido;
 
-        this.valorFinal = veiculo.calcularValorFinal();
+        this.valorFinal = calcularValorFinal();
 
-        this.snapshotVeiculo = veiculo.toString();
+        this.snapshotVeiculo = String.format(
+                """
+                ID Item: %d
+                Veículo: %s
+                Preço: %.2f
+                """,
+                itemVendido.getIdItem(),
+                itemVendido.getVeiculo().toString(),
+                itemVendido.getPreco()
+        );
 
         this.snapshotCliente = String.format("ID: %d | Nome: %s | CPF: %s",
                 cliente.getIdCliente(),
                 cliente.getNomeCompleto(),
                 cliente.getCpf());
+    }
+
+    @Override
+    public double calcularValorFinal(){
+        return formaPagamento.aplicarTaxa(itemVendido.calcularValorFinal());
     }
 
     @Override

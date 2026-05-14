@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class controleEstoque {
-    private List<Veiculo> controleEstoque;
+    private List<itemEstoque> controleEstoque;
     private int proximoId;
 
     public controleEstoque(){
@@ -13,16 +13,15 @@ public class controleEstoque {
         proximoId = 0;
     }
 
-    public void addVeiculo(Veiculo veiculo){
+    public void addEstoque(Veiculo veiculo, double preco){
         proximoId++;
-        veiculo.setIdVeiculo(proximoId);
-        controleEstoque.add(veiculo);
+        controleEstoque.add(new itemEstoque(veiculo, preco, proximoId));
     }
 
-    public Veiculo removerVeiculo(int idVeiculo) {
-        for (Veiculo v : controleEstoque) {
+    public itemEstoque removerEstoque(int itemId) {
+        for (itemEstoque v : controleEstoque) {
             if (controleEstoque.isEmpty()) return null;
-            if (v.getIdVeiculo() == idVeiculo) {
+            if (v.getIdItem() == itemId) {
                 //System.out.println(v);
                 controleEstoque.remove(v);
                 return v;
