@@ -18,6 +18,7 @@ public class ControleClientes {
     public void addCliente(String nomeCompleto, String cpf, String endereco, LocalDate nascimentoData, double dinheiroIncial){
         proximoId++;
         ControleClientes.add(new Cliente(nomeCompleto, cpf, endereco, nascimentoData, proximoId, dinheiroIncial));
+        System.out.println("✓ Cliente " + proximoId + " cadastrado com sucesso");
     }
 
     public void removerCliente(int idCliente) {

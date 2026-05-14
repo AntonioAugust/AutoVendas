@@ -32,13 +32,21 @@ public class ControleVendas {
             return;
         }
 
-        cliente.getCarteira().Remover(valorVenda);
+        double saldoAntes = cliente.getCarteira().getDinheiro();
+        cliente.getCarteira().remover(valorVenda);
 
         Venda novaVenda = new Venda(proximoId++, cliente, veiculo, formaPagamento);
         listaVendas.add(novaVenda);
 
+        // Exibir detalhes da venda
+        System.out.println("\n--- VENDA #" + novaVenda.getIdVenda() + " ---");
+        System.out.println("Cliente: " + cliente.getNomeCompleto());
+        System.out.println("Veículo: " + veiculo.getMarca() + " " + veiculo.getModelo());
+        System.out.println("Valor: R$ " + String.format("%.2f", valorVenda));
+        System.out.println("Saldo antes: R$ " + String.format("%.2f", saldoAntes));
+        System.out.println("Saldo após: R$ " + String.format("%.2f", cliente.getCarteira().getDinheiro()));
+        System.out.println("✓ Venda realizada com sucesso!");
     }
-
 
     public void verVenda(int idVenda){
         for(Venda v : listaVendas){

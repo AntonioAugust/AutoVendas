@@ -7,7 +7,7 @@ import java.time.LocalDate;
  * Assim como o carro, a moto tambem herda da classe Veiculo.
  */
 public class Moto extends Veiculo {
-    private int cilindradas;
+    private final int cilindradas; // final, pois a cilindradas não é alterada
 
     /**
      * Construtor da classe Moto.
@@ -16,7 +16,7 @@ public class Moto extends Veiculo {
      * @param modelo modelo da moto
      * @param anoFabricacao ano de fabricacao da moto
      * @param placa placa da moto
-
+     * @param precoBase valor base da moto
      * @param cor cor da moto
      * @param cilindradas quantidade de cilindradas da moto
      */
@@ -25,17 +25,34 @@ public class Moto extends Veiculo {
         this.cilindradas = cilindradas;
     }
 
+    /**
+     * Retorna o tipo do veículo.
+     * Implementa o método abstrato da classe Veiculo para identificar o objeto como uma Moto.
+     *
+     * @return tipo do veículo
+     */
     @Override
     public String getTipo(){
         return "Moto";
     }
 
+    /**
+     * Retorna uma representação em String da moto.
+     * Complementa a representação da classe mãe com a informação específica de cilindradas.
+     *
+     * @return dados formatados da moto
+     */
     @Override
     public String toString() {
         // Usamos o super.toString() para pegar a parte comum e adicionamos o específico
         return super.toString() + String.format(" | Cilindradas: %dcc", cilindradas);
     }
 
+    /**
+     * Retorna a quantidade de cilindradas da moto.
+     *
+     * @return quantidade de cilindradas
+     */
     public int getCilindradas() {
         return cilindradas;
     }

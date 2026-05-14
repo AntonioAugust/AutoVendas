@@ -1,7 +1,12 @@
 package locadoraDeCarros;
+
 import java.time.LocalDate;
 
-public abstract class Veiculo {
+/**
+ * Classe abstrata que representa a base de um veículo no sistema.
+ * Ela define os atributos e comportamentos comuns a todos os veículos.
+ */
+public abstract class Veiculo implements Locavel {
     private int idVeiculo;
     private String marca;
     private String modelo;
@@ -9,7 +14,18 @@ public abstract class Veiculo {
     private String cor;
     private LocalDate anoFabricacao;
     private double precoBase;
+    private boolean disponivel;
 
+    /**
+     * Construtor da classe Veiculo.
+     *
+     * @param marca marca do veículo
+     * @param modelo modelo do veículo
+     * @param placa placa do veículo
+     * @param cor cor do veículo
+     * @param anoFabricacao data de fabricação do veículo
+     * @param precoBase valor base do veículo
+     */
     public Veiculo(String marca, String modelo, String placa, String cor, LocalDate anoFabricacao, double precoBase) {
         this.marca = marca;
         this.modelo = modelo;
@@ -17,15 +33,50 @@ public abstract class Veiculo {
         this.cor = cor;
         this.anoFabricacao = anoFabricacao;
         this.precoBase = precoBase;
+        this.disponivel = true;
     }
 
+    /**
+     * Método abstrato que retorna o tipo do veículo.
+     * Deve ser implementado pelas subclasses para identificar o tipo específico (Ex: Carro, Moto).
+     *
+     * @return tipo do veículo
+     */
+    public abstract String getTipo();
+
+    /**
+     * Retorna uma representação em String do veículo.
+     * Utiliza o polimorfismo através do método getTipo().
+     *
+     * @return dados formatados do veículo
+     */
     @Override
     public String toString() {
-        return String.format("ID: %d | %s %s | Placa: %s | Cor: %s",
-                idVeiculo, marca, modelo, placa, cor);
+        return String.format("ID: %d | [%s] %s %s | Placa: %s | Cor: %s | Preço: R$ %.2f",
+                idVeiculo, getTipo(), marca, modelo, placa, cor, precoBase);
     }
 
-    public abstract String getTipo();
+    /**
+     * Define a disponibilidade do veículo para locação.
+     * Implementa o método da interface Locavel.
+     *
+     * @param disponivel true se o veículo está disponível, false caso contrário
+     */
+    @Override
+    public void setDisponivel(boolean disponivel) {
+        this.disponivel = disponivel;
+    }
+
+    /**
+     * Verifica se o veículo está disponível para locação.
+     * Implementa o método da interface Locavel.
+     *
+     * @return true se o veículo está disponível, false caso contrário
+     */
+    @Override
+    public boolean isDisponivel() {
+        return disponivel;
+    }
 
     public double getPreco() {
         return precoBase;
@@ -77,5 +128,9 @@ public abstract class Veiculo {
 
     public void setIdVeiculo(int idVeiculo) {
         this.idVeiculo = idVeiculo;
+    }
+
+    public void setPreco(double precoBase) {
+        this.precoBase = precoBase; //permite alterar o preco do veiculo apos ter sido criado
     }
 }

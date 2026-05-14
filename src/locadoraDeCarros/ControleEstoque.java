@@ -16,6 +16,7 @@ public class ControleEstoque {
         proximoId++;
         veiculo.setIdVeiculo(proximoId);
         ControleEstoque.add(veiculo);
+        System.out.println("✓ " + veiculo.getTipo() + " adicionado ao estoque - ID: " + veiculo.getIdVeiculo() + " | Disponível: " + veiculo.isDisponivel());
     }
 
     public Veiculo removerVeiculo(int idVeiculo) {
