@@ -7,7 +7,7 @@ import java.time.LocalDate;
  * Assim como o carro, a moto tambem herda da classe Veiculo.
  */
 public class Moto extends Veiculo {
-    private final int cilindradas; // final, pois a cilindradas não é alterada
+    private final int cilindradas; // final, pois as cilindradas não é alterada
 
     /**
      * Construtor da classe Moto.
@@ -27,7 +27,7 @@ public class Moto extends Veiculo {
 
     /**
      * Retorna o tipo do veículo.
-     * Implementa o método abstrato da classe Veiculo para identificar o objeto como uma Moto.
+     * Implementa o metodo abstrato da classe Veiculo para identificar o objeto como uma Moto.
      *
      * @return tipo do veículo
      */

@@ -6,7 +6,7 @@ import java.time.LocalDate;
  * Classe abstrata que representa a base de um veículo no sistema.
  * Ela define os atributos e comportamentos comuns a todos os veículos.
  */
-public abstract class Veiculo implements Locavel {
+public abstract class Veiculo implements Comercializavel {
     private int idVeiculo;
     private String marca;
     private String modelo;
@@ -37,7 +37,7 @@ public abstract class Veiculo implements Locavel {
     }
 
     /**
-     * Método abstrato que retorna o tipo do veículo.
+     * Metodo abstrato que retorna o tipo do veículo.
      * Deve ser implementado pelas subclasses para identificar o tipo específico (Ex: Carro, Moto).
      *
      * @return tipo do veículo
@@ -46,7 +46,7 @@ public abstract class Veiculo implements Locavel {
 
     /**
      * Retorna uma representação em String do veículo.
-     * Utiliza o polimorfismo através do método getTipo().
+     * Utiliza o polimorfismo através do metodo getTipo().
      *
      * @return dados formatados do veículo
      */
@@ -58,7 +58,7 @@ public abstract class Veiculo implements Locavel {
 
     /**
      * Define a disponibilidade do veículo para locação.
-     * Implementa o método da interface Locavel.
+     * Implementa o metodo da interface Locavel.
      *
      * @param disponivel true se o veículo está disponível, false caso contrário
      */
@@ -69,7 +69,7 @@ public abstract class Veiculo implements Locavel {
 
     /**
      * Verifica se o veículo está disponível para locação.
-     * Implementa o método da interface Locavel.
+     * Implementa o metodo da interface Locavel.
      *
      * @return true se o veículo está disponível, false caso contrário
      */

@@ -4,7 +4,7 @@ package locadoraDeCarros;
  * Interface usada para indicar que um objeto pode ser locado no sistema.
  * No nosso caso, os veiculos podem ser locados.
  */
-public interface Locavel {
+public interface Comercializavel {
 
     /**
      * Define a disponibilidade do veículo para locação.
