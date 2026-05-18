@@ -12,7 +12,6 @@ public class itemEstoque implements Calculavel{
         this.idItem = idItem;
     }
 
-
     @Override
     public double calcularValorFinal(){
         return this.preco + (this.preco * taxaEmpresa);

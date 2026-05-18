@@ -30,5 +30,15 @@ public class controleEstoque {
         return null;
     }
 
+    public itemEstoque buscarPorId(int id){
+
+        for(itemEstoque item : controleEstoque){
+            if(item.getIdItem() == id){
+                return item;
+            }
+        }
+        return null;
+    }
+
 
 }

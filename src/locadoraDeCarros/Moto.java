@@ -1,24 +1,12 @@
 package locadoraDeCarros;
 
-import java.time.LocalDate;
-
 
 public class Moto extends Veiculo {
     private int cilindradas;
 
-    public Moto(String marca, String modelo, LocalDate anoFabricacao, String placa, double precoBase, String cor, int cilindradas) {
+    public Moto(String marca, String modelo, String placa, String cor, int anoFabricacao, int cilindradas) {
         super(marca, modelo, placa, cor, anoFabricacao);
         this.cilindradas = cilindradas;
-    }
-
-    @Override
-    public double calcularValorFinal() {
-        return getPreco() + (getPreco()* 0.03);
-    }
-
-    @Override
-    public String getTipo(){
-        return "Moto";
     }
 
     @Override

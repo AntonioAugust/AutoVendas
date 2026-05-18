@@ -9,6 +9,7 @@ public class Carteira {
 
 
     public Carteira(double dinheiroInicial){
+
         this.dinheiro = dinheiroInicial;
     }
 

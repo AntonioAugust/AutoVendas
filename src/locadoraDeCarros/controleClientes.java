@@ -15,9 +15,9 @@ public class controleClientes {
         proximoId = 0;
     }
 
-    public void addCliente(String nomeCompleto, String cpf, String endereco, LocalDate nascimentoData, double dinheiroIncial){
+    public void addCliente(String nomeCompleto, String cpf, String endereco, LocalDate nascimentoData, double dinheiroInicial){
         proximoId++;
-        controleClientes.add(new Cliente(nomeCompleto, cpf, endereco, nascimentoData, proximoId, dinheiroIncial));
+        controleClientes.add(new Cliente(nomeCompleto, cpf, endereco, nascimentoData, proximoId, dinheiroInicial));
     }
 
     public void removerCliente(int idCliente) {
@@ -31,7 +31,7 @@ public class controleClientes {
         }
     }
 
-    public Cliente getCliente(int id) {
+    public Cliente buscarPorId(int id) {
         for (Cliente c : controleClientes) {
             if (c.getIdCliente() == id) return c;
         }

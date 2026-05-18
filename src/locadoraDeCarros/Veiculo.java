@@ -2,15 +2,15 @@ package locadoraDeCarros;
 import java.time.LocalDate;
 
 
-public abstract class Veiculo implements Comercializavel {
+public abstract class Veiculo{
     private String marca;
     private String modelo;
     private String placa;
     private String cor;
-    private LocalDate anoFabricacao;
+    private int anoFabricacao;
 
 
-    public Veiculo(String marca, String modelo, String placa, String cor, LocalDate anoFabricacao) {
+    public Veiculo(String marca, String modelo, String placa, String cor, int anoFabricacao) {
         this.marca = marca;
         this.modelo = modelo;
         this.placa = placa;
@@ -24,12 +24,6 @@ public abstract class Veiculo implements Comercializavel {
         return String.format("| Marca: %s | Modelo: %s | Placa: %s | Cor: %s",
                 marca, modelo, placa, cor);
     }
-
-
-    @Override
-    public abstract double calcularValorFinal();
-
-    public abstract String getTipo();
 
 
     public String getMarca() {
@@ -48,7 +42,7 @@ public abstract class Veiculo implements Comercializavel {
         return cor;
     }
 
-    public LocalDate getAnoFabricacao() {
+    public int getAnoFabricacao() {
         return anoFabricacao;
     }
 
@@ -68,7 +62,7 @@ public abstract class Veiculo implements Comercializavel {
         this.cor = cor;
     }
 
-    public void setAnoFabricacao(LocalDate anoFabricacao) {
+    public void setAnoFabricacao(int anoFabricacao) {
         this.anoFabricacao = anoFabricacao;
     }
 

@@ -14,29 +14,26 @@ public class ControleVendas {
         proximoId = 1;
     }
 
-    public void adicionarVenda(Cliente cliente, Veiculo veiculo, String formaPagamento){
+    public void adicionarVenda(Cliente cliente, itemEstoque item, FormaPagamento formaPagamento){
 
-        Veiculo veiculoRemov = estoque.removerVeiculo(veiculo.getIdVeiculo());
-        if (veiculoRemov == null) {
-            System.out.println("ERRO: Veículo com ID " + veiculo.getIdVeiculo() + " não encontrado no estoque!");
-            return;
+        itemEstoque itemEncontrado = estoque.buscarPorId(item.getIdItem());
+        if(itemEncontrado == null){
+            throw new IllegalArgumentException("Item não encontrado no estoque");
         }
 
-        double valorVenda = veiculo.calcularValorFinal();
+        Venda novaVenda = new Venda(proximoId, cliente, formaPagamento, item);
+
+        double valorVenda = novaVenda.calcularValorFinal();
 
         if(cliente.getCarteira().getDinheiro() < valorVenda){
-            System.out.println("ERRO: Saldo insuficiente! Saldo: " + cliente.getCarteira().getDinheiro() + " | Necessário: " + valorVenda);
-
-            //Se não tem dinheiro devolvemos o carro para o estoque
-            estoque.addVeiculo(veiculoRemov);
-            return;
+            throw new IllegalStateException("Saldo insuficiente");
         }
+        estoque.removerEstoque(item.getIdItem());
 
         cliente.getCarteira().Remover(valorVenda);
 
-        Venda novaVenda = new Venda(proximoId++, cliente, veiculo, formaPagamento);
         listaVendas.add(novaVenda);
-
+        proximoId++;
     }
 
 

@@ -21,7 +21,7 @@ public class Cliente extends Pessoa{
     }
 
     public int getIdCliente(){
-        return  this.idCliente;
+        return idCliente;
     }
 
     public Cliente(String nomeCompleto, String cpf, String endereco, LocalDate nascimentoData, int idCliente, double dinheiroIncial){

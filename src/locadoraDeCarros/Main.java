@@ -3,57 +3,143 @@ import java.time.LocalDate;
 
 public class Main {
 
-    public static void main() {
-        // 1. Inicializa os Gerenciadores
-        controleClientes gestorClientes = new controleClientes();
-        controleEstoque gestorEstoque = new controleEstoque();
-        // O ControleVendas precisa conhecer o estoque para validar os veículos
-        ControleVendas gestorVendas = new ControleVendas(gestorEstoque);
+    public static void main(String[] args) {
 
-        // --- CADASTRO DE CLIENTES ---
-        System.out.println("--- Cadastrando Clientes ---");
-        gestorClientes.addCliente("Fulano de Tal", "123.456.789-00", "Rua A, 123",
-                LocalDate.of(1995, 5, 20), 500000.00); // Dei mais saldo para ele conseguir comprar
+        controleClientes clientes =
+                new controleClientes();
 
-        gestorClientes.addCliente("Ciclana Souza", "987.654.321-11", "Av. Central, 50",
-                LocalDate.of(1988, 11, 10), 150000.00);
+        controleEstoque estoque =
+                new controleEstoque();
 
-        // --- CADASTRO DE VEÍCULOS NO ESTOQUE ---
-        System.out.println("\n--- Cadastrando Veículos no Estoque ---");
+        ControleVendas vendas =
+                new ControleVendas(estoque);
 
-        Carro c1 = new Carro("Toyota", "Corolla", LocalDate.of(2023, 1, 1), "ABC-1234", "Prata", 4 , 160000.00);
-        Moto m1 = new Moto("Honda", "CB 500", LocalDate.of(2024, 2, 1) ,"XYZ-5678", 35000.00, "Vermelho", 500);
 
-        gestorEstoque.addVeiculo(c1); // Receberá ID 1
-        gestorEstoque.addVeiculo(m1); // Receberá ID 2
+        cadastrarClientes(clientes);
 
-        // --- REALIZANDO VENDAS ---
-        System.out.println("\n--- Iniciando Transações ---");
+        cadastrarVeiculos(estoque);
 
-        // Precisamos pegar os objetos Clientes para passar para a venda
-        // Supondo que o ID 1 é o Fulano e o ID 2 é a Ciclana
-        Cliente fulano = gestorClientes.getCliente(1);
-        Cliente ciclana = gestorClientes.getCliente(2);
+        realizarVenda(clientes.buscarPorId(1), estoque.buscarPorId(1), new Pix(), vendas);
 
-        // Tentativa de Venda 1: Fulano compra o Corolla (ID 1)
-        if (fulano != null) {
-            gestorVendas.adicionarVenda(fulano, c1, "Cartão de Crédito");
+        realizarVenda(clientes.buscarPorId(2), estoque.buscarPorId(2), new CartaoCredito(3), vendas);
+
+        mostrarResumo(clientes, vendas);
+
+    }
+    // =========================
+
+    private static void cadastrarClientes(
+            controleClientes clientes) {
+
+        clientes.addCliente(
+                "Fulano de Tal",
+                "123.456.789-00",
+                "Rua A, 123",
+                LocalDate.of(1995, 5, 20),
+                500000
+        );
+
+        clientes.addCliente(
+                "Ciclana Souza",
+                "987.654.321-11",
+                "Av. Central, 50",
+                LocalDate.of(1988, 11, 10),
+                150000
+        );
+    }
+
+    // =========================
+
+    private static void cadastrarVeiculos(
+            controleEstoque estoque) {
+
+        Veiculo corolla =
+                new Carro(
+                        "Toyota",
+                        "Corolla",
+                        "ABC-1234",
+                        "Prata",
+                        2004,
+                        4
+                );
+
+        Veiculo cb500 =
+                new Moto(
+                        "Honda",
+                        "CB 500",
+                        "XYZ-5678",
+                        "Vermelho",
+                        2006,
+                        500
+                );
+
+        estoque.addEstoque(corolla, 120000);
+
+        estoque.addEstoque(cb500, 90000);
+    }
+
+    // =========================
+
+    private static void realizarVenda(
+            Cliente cliente,
+            itemEstoque item,
+            FormaPagamento formaPagamento,
+            ControleVendas vendas) {
+
+        try {
+
+            vendas.adicionarVenda(
+                    cliente,
+                    item,
+                    formaPagamento
+            );
+
+            System.out.println(
+                    "Venda realizada com sucesso!"
+            );
+
+        } catch (Exception e) {
+
+            System.out.println(
+                    "Erro ao realizar venda: "
+                            + e.getMessage()
+            );
         }
+    }
 
-        // Tentativa de Venda 2: Ciclana compra a Moto (ID 2)
-        if (ciclana != null) {
-            gestorVendas.adicionarVenda(ciclana, m1, "PIX");
-        }
+    // =========================
 
-        // --- VERIFICAÇÃO FINAL ---
-        System.out.println("\n--- Histórico de Vendas Realizadas ---");
-        gestorVendas.verVenda(1);
-        gestorVendas.verVenda(2);
+    private static void mostrarResumo(
+            controleClientes clientes,
+            ControleVendas vendas) {
 
-        System.out.println("\n--- Saldo Atual dos Clientes ---");
-        System.out.println(fulano.getNomeCompleto() + " saldo: R$ " + fulano.getCarteira().getDinheiro());
-        System.out.println(ciclana.getNomeCompleto() + " saldo: R$ " + ciclana.getCarteira().getDinheiro());
+        System.out.println(
+                "\n--- Histórico de Vendas ---"
+        );
 
+        vendas.verVenda(1);
+        vendas.verVenda(2);
 
+        Cliente fulano =
+                clientes.buscarPorId(1);
+
+        Cliente ciclana =
+                clientes.buscarPorId(2);
+
+        System.out.println(
+                "\n--- Saldo Clientes ---"
+        );
+
+        System.out.println(
+                fulano.getNomeCompleto()
+                        + " saldo: R$ "
+                        + fulano.getCarteira().getDinheiro()
+        );
+
+        System.out.println(
+                ciclana.getNomeCompleto()
+                        + " saldo: R$ "
+                        + ciclana.getCarteira().getDinheiro()
+        );
     }
 }
