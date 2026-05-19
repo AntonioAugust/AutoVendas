@@ -1,12 +1,12 @@
 package autovendas;
 
-public class itemEstoque implements Calculavel{
+public class ItemEstoque implements Calculavel{
     private int idItem;
     private Veiculo veiculo;
     private double preco;
     private double taxaEmpresa = 0.10;
 
-    public itemEstoque(Veiculo veiculo, double preco, int idItem){
+    public ItemEstoque(Veiculo veiculo, double preco, int idItem){
         this.veiculo = veiculo;
         this.preco = preco;
         this.idItem = idItem;
@@ -27,4 +27,10 @@ public class itemEstoque implements Calculavel{
         return this.preco;
     }
 
+    public void setTaxaEmpresa(double taxaEmpresa) {
+        if (taxaEmpresa < 0){
+            throw new IllegalArgumentException("A taxa de empresa não pode sernegativa");
+        }
+        this.taxaEmpresa = taxaEmpresa;
+    }
 }

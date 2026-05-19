@@ -14,9 +14,9 @@ public class ControleVendas {
         proximoId = 1;
     }
 
-    public void adicionarVenda(Cliente cliente, itemEstoque item, FormaPagamento formaPagamento){
+    public void adicionarVenda(Cliente cliente, ItemEstoque item, FormaPagamento formaPagamento){
 
-        itemEstoque itemEncontrado = estoque.buscarPorId(item.getIdItem());
+        ItemEstoque itemEncontrado = estoque.buscarPorId(item.getIdItem());
         if(itemEncontrado == null){
             throw new IllegalArgumentException("Item não encontrado no estoque");
         }
@@ -54,6 +54,4 @@ public class ControleVendas {
             }
         }
     }
-
-
 }

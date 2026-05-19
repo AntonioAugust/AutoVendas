@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ControleEstoque {
-    private List<itemEstoque> controleEstoque;
+    private List<ItemEstoque> controleEstoque;
     private int proximoId;
 
     public ControleEstoque(){
@@ -14,30 +14,30 @@ public class ControleEstoque {
 
     public void addEstoque(Veiculo veiculo, double preco){
         proximoId++;
-        controleEstoque.add(new itemEstoque(veiculo, preco, proximoId));
+        controleEstoque.add(new ItemEstoque(veiculo, preco, proximoId));
     }
 
-    public itemEstoque removerEstoque(int itemId) {
-        for (itemEstoque v : controleEstoque) {
-            if (controleEstoque.isEmpty()) return null;
-            if (v.getIdItem() == itemId) {
-                //System.out.println(v);
-                controleEstoque.remove(v);
-                return v;
+    public ItemEstoque removerEstoque(int itemId) {
+        ItemEstoque itemRemover = null;
+        for (ItemEstoque v : controleEstoque){
+            if (v.getIdItem() == itemId){
+                itemRemover = v;
+                break;
             }
         }
-        return null;
+        if (itemRemover != null){
+            controleEstoque.remove(itemRemover);
+        }
+        return itemRemover;
     }
 
-    public itemEstoque buscarPorId(int id){
+    public ItemEstoque buscarPorId(int id){
 
-        for(itemEstoque item : controleEstoque){
+        for(ItemEstoque item : controleEstoque){
             if(item.getIdItem() == id){
                 return item;
             }
         }
         return null;
     }
-
-
 }

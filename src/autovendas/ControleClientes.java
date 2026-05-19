@@ -21,13 +21,16 @@ public class ControleClientes {
     }
 
     public void removerCliente(int idCliente) {
+        Cliente clienteRemover = null;
         for (Cliente v : controleClientes) {
-            if (controleClientes.isEmpty()) return;
             if (v.getIdCliente() == idCliente) {
-                System.out.println(v);
-                controleClientes.remove(v);
-                return;
+                clienteRemover = v;
+                break;
             }
+        }
+        if (clienteRemover != null) {
+            System.out.println(clienteRemover);
+            controleClientes.remove(clienteRemover);
         }
     }
 

@@ -5,22 +5,24 @@ import java.time.LocalDate;
 public class Venda implements Calculavel{
     private final int idVenda;
     private final LocalDate data;
-    private final Double valorFinal;
+    private final double valorFinal;
     private final FormaPagamento formaPagamento;
-    private final itemEstoque itemVendido;
+    private final ItemEstoque itemVendido;
 
     // Snapshots (Strings que não mudam mais)
     private  final String snapshotVeiculo;
     private final String snapshotCliente;
 
-    public Venda(int idVenda, Cliente cliente, FormaPagamento formaPagamento, itemEstoque itemVendido) {
+    public Venda(int idVenda, Cliente cliente, FormaPagamento formaPagamento, ItemEstoque itemVendido) {
+        if (cliente == null || formaPagamento == null || itemVendido == null) {
+            throw new IllegalArgumentException("A venda não pode ser iniciada com dados nulos");
+        }
+
         this.idVenda = idVenda;
         this.formaPagamento = formaPagamento;
         this.data = LocalDate.now();
         this.itemVendido = itemVendido;
-
         this.valorFinal = calcularValorFinal();
-
         this.snapshotVeiculo = String.format(
                 """
                 ID Item: %d

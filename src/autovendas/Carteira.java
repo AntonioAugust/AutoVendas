@@ -17,7 +17,7 @@ public class Carteira {
             this.dinheiro += quantidade;
         }
         else{
-            System.out.println("Quantidade inválida para deposito");
+            throw new IllegalArgumentException ("Quantidade inválida para deposito");
         }
     }
     /**
@@ -30,7 +30,7 @@ public class Carteira {
             this.dinheiro -= quantidade;
         }
         else{
-            System.out.println("Você não tem dinheiro o suficiente para essa operação");
+            throw new IllegalArgumentException ("Você não tem dinheiro o suficiente para essa operação");
         }
     }
 
