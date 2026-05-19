@@ -11,7 +11,6 @@ Uma aplicação desenvolvida em Java para auxiliar no controle de clientes, esto
 
 - **Antonio Augusto**
 - **Artur Antunes**
-- **Eduardo Liscano Guerra**
 - **Julielen Dorneles**
 
 ---
@@ -70,6 +69,8 @@ A organização principal do sistema foi dividida da seguinte forma:
 - `ControleEstoque`: responsável pelo gerenciamento do estoque de veículos
 - `ControleVendas`: responsável pelo fluxo de vendas
 - `Venda`: responsável pelo registro das vendas realizadas
+- `Calculavel`: interface implementada por itemEstoque e Venda
+
 
 ---
 
