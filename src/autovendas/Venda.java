@@ -44,16 +44,23 @@ public class Venda implements Calculavel{
     public double calcularValorFinal(){
         return formaPagamento.aplicarTaxa(itemVendido.calcularValorFinal());
     }
+    // classe interna privada que só existe na venda
+    private class Recibo {
+        public String formatar() {
+            return "--- RECIBO DE VENDA #" + idVenda + " ---" +
+                    "\nData: " + data +
+                    "\nCliente: " + snapshotCliente +
+                    "\nVeículo: " + snapshotVeiculo +
+                    "\nValor Pago: R$ " + String.format("%.2f", valorFinal) +
+                    "\nForma de Pagamento: " + formaPagamento.getNome() +
+                    "\n----------------------------";
+        }
+    }
 
     @Override
     public String toString() {
-        return "--- RECIBO DE VENDA #" + idVenda + " ---" +
-                "\nData: " + data +
-                "\nCliente: " + snapshotCliente +
-                "\nVeículo: " + snapshotVeiculo +
-                "\nValor Pago: R$ " + String.format("%.2f", valorFinal) +
-                "\nForma de Pagamento: " + formaPagamento +
-                "\n----------------------------";
+        Recibo recibo = new Recibo();
+        return recibo.formatar();
     }
 
     public int getIdVenda() {
